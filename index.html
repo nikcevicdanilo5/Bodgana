@@ -238,96 +238,186 @@
     #hero {
       position: relative;
       height: 100svh;
-      min-height: 560px;
+      min-height: 600px;
       display: flex;
-      align-items: flex-end;
-      padding-bottom: 80px;
+      align-items: center;
       overflow: hidden;
     }
 
     .hero-bg {
       position: absolute;
       inset: 0;
-      background: var(--blush);
-      /* Replace with: background-image: url('pictures/hero-bg.jpg'); */
+      /* Replace with: background-image: url('pictures/hero-bg.jpg'); background-size: cover; background-position: center; */
     }
     /* pictures/hero-bg.jpg */
-    .hero-bg img { display: none; /* remove when image available */ }
 
-    /* Decorative placeholder pattern for hero */
+    /* Lush layered gradient background */
     .hero-bg::before {
       content: '';
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(ellipse 60% 80% at 70% 40%, rgba(201,150,126,0.4) 0%, transparent 65%),
-        radial-gradient(ellipse 40% 50% at 20% 70%, rgba(184,151,90,0.2) 0%, transparent 55%),
-        linear-gradient(155deg, #e8cfc4 0%, #d4a898 40%, #c9967e 100%);
+        radial-gradient(ellipse 70% 90% at 80% 30%, rgba(201,150,126,0.55) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 60% at 10% 80%, rgba(184,151,90,0.25) 0%, transparent 55%),
+        radial-gradient(ellipse 40% 40% at 50% 10%, rgba(232,207,196,0.4) 0%, transparent 50%),
+        linear-gradient(145deg, #2a1510 0%, #4a2c1e 35%, #6b3c28 65%, #3d1f12 100%);
+    }
+
+    /* Decorative large B monogram background */
+    .hero-mono {
+      position: absolute;
+      right: -2vw; top: 50%;
+      transform: translateY(-50%);
+      font-family: var(--serif);
+      font-size: clamp(280px, 38vw, 520px);
+      font-weight: 600;
+      font-style: italic;
+      color: rgba(255,255,255,0.035);
+      line-height: 1;
+      user-select: none;
+      pointer-events: none;
+      letter-spacing: -0.05em;
+    }
+
+    /* Floating golden ring accent */
+    .hero-ring {
+      position: absolute;
+      width: clamp(200px, 28vw, 380px);
+      height: clamp(200px, 28vw, 380px);
+      border-radius: 50%;
+      border: 1px solid rgba(184,151,90,0.22);
+      top: 50%; right: 8vw;
+      transform: translateY(-50%);
+      animation: heroRingPulse 6s ease-in-out infinite;
+      pointer-events: none;
+    }
+    .hero-ring::after {
+      content: '';
+      position: absolute;
+      inset: 18px;
+      border-radius: 50%;
+      border: 1px solid rgba(184,151,90,0.14);
+    }
+    @keyframes heroRingPulse {
+      0%,100% { opacity: 0.6; transform: translateY(-50%) scale(1); }
+      50% { opacity: 1; transform: translateY(-50%) scale(1.03); }
+    }
+
+    /* Gold horizontal line accent */
+    .hero-line-top {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: 0.5;
     }
 
     .hero-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(30,15,10,0.72) 0%, rgba(30,15,10,0.1) 55%, transparent 100%);
+      background: linear-gradient(to right, rgba(20,8,4,0.78) 0%, rgba(20,8,4,0.45) 55%, rgba(20,8,4,0.1) 100%);
     }
 
     .hero-content {
       position: relative;
       z-index: 2;
       color: var(--white);
+      padding-top: 64px;
     }
-    .hero-eyebrow {
-      font-size: 0.72rem;
+
+    /* Animated pill tag */
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(184,151,90,0.2);
+      border: 1px solid rgba(184,151,90,0.4);
+      border-radius: 40px;
+      padding: 7px 16px;
+      margin-bottom: 28px;
+      backdrop-filter: blur(6px);
+    }
+    .hero-tag-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--gold-lt);
+      animation: tagDotPulse 2.2s ease-in-out infinite;
+    }
+    @keyframes tagDotPulse {
+      0%,100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.7); }
+    }
+    .hero-tag-text {
+      font-size: 0.7rem;
       font-weight: 400;
-      letter-spacing: 0.28em;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.75);
-      margin-bottom: 18px;
+      color: var(--gold-lt);
     }
+
     .hero-title {
       font-family: var(--serif);
-      font-size: clamp(2.6rem, 8vw, 5.5rem);
+      font-size: clamp(2.8rem, 7.5vw, 5.8rem);
       font-weight: 300;
-      line-height: 1.05;
-      margin-bottom: 20px;
-      max-width: 620px;
+      line-height: 1.0;
+      margin-bottom: 24px;
+      max-width: 650px;
     }
-    .hero-title em {
-      font-style: italic;
+    .hero-title .t-normal { display: block; color: rgba(255,255,255,0.95); letter-spacing: -0.01em; }
+    .hero-title .t-italic {
       display: block;
-    }
-    .hero-sub {
-      font-size: clamp(0.85rem, 2vw, 1rem);
+      font-style: italic;
       font-weight: 300;
-      color: rgba(255,255,255,0.82);
-      max-width: 440px;
-      margin-bottom: 36px;
-      line-height: 1.7;
+      background: linear-gradient(90deg, var(--gold-lt), var(--blush));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-top: 4px;
+    }
+
+    /* Gold rule under title */
+    .hero-rule {
+      width: 64px; height: 1px;
+      background: linear-gradient(90deg, var(--gold), transparent);
+      margin-bottom: 22px;
+    }
+
+    .hero-sub {
+      font-size: clamp(0.88rem, 1.8vw, 1rem);
+      font-weight: 300;
+      color: rgba(255,255,255,0.72);
+      max-width: 400px;
+      margin-bottom: 40px;
+      line-height: 1.75;
+      letter-spacing: 0.01em;
     }
     .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
 
     /* Scroll indicator */
     .scroll-hint {
       position: absolute;
-      bottom: 28px; right: 28px;
+      bottom: 32px; left: 50%;
+      transform: translateX(-50%);
       z-index: 3;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 8px;
-      color: rgba(255,255,255,0.5);
-      font-size: 0.65rem;
-      letter-spacing: 0.18em;
+      gap: 10px;
+    }
+    .scroll-hint-text {
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
+      color: rgba(255,255,255,0.38);
     }
     .scroll-hint-line {
-      width: 1px; height: 48px;
-      background: linear-gradient(to bottom, rgba(255,255,255,0.5), transparent);
-      animation: scrollLine 2s ease-in-out infinite;
+      width: 1px; height: 44px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent);
+      animation: scrollLine 2.4s ease-in-out infinite;
     }
     @keyframes scrollLine {
-      0%,100% { opacity: 0.3; transform: scaleY(1); }
-      50% { opacity: 1; transform: scaleY(1.15); }
+      0%,100% { opacity: 0.3; transform: scaleY(1) translateY(0); }
+      50% { opacity: 1; transform: scaleY(1.1) translateY(3px); }
     }
 
     /* ─── ABOUT ──────────────────────────────────────────────── */
@@ -467,57 +557,158 @@
     }
 
     /* ─── GALLERY ────────────────────────────────────────────── */
-    #gallery { background: var(--beige); }
+    #gallery { background: var(--beige); overflow: hidden; }
 
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-    }
-    .gallery-grid .g-wide { grid-column: span 2; }
-
-    .gallery-item {
+    .gallery-scroll-wrap {
       position: relative;
-      overflow: hidden;
-      border-radius: 4px;
-      cursor: pointer;
-      aspect-ratio: 1;
-      background: var(--blush);
     }
-    .g-wide { aspect-ratio: 2/1; }
-    .gallery-item-inner {
-      position: absolute;
-      inset: 0;
-      transition: transform 0.4s ease;
+    .gallery-scroll-track {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding: 0 24px 24px;
+      cursor: grab;
+      user-select: none;
+      scrollbar-width: none;
     }
-    /* Each item gets a soft placeholder gradient */
-    .gallery-item:nth-child(1) .gallery-item-inner { background: linear-gradient(135deg, #e8cfc4, #c9967e); }
-    .gallery-item:nth-child(2) .gallery-item-inner { background: linear-gradient(135deg, #d4b07a, #b8975a); }
-    .gallery-item:nth-child(3) .gallery-item-inner { background: linear-gradient(135deg, #c9967e, #a07060); }
-    .gallery-item:nth-child(4) .gallery-item-inner { background: linear-gradient(135deg, #e0c5b8, #d4a898); }
-    .gallery-item:nth-child(5) .gallery-item-inner { background: linear-gradient(135deg, #b8975a, #8a6d3c); }
-    .gallery-item:nth-child(6) .gallery-item-inner { background: linear-gradient(135deg, #d4b07a, #c9967e); }
+    .gallery-scroll-track::-webkit-scrollbar { display: none; }
+    .gallery-scroll-track.dragging { cursor: grabbing; }
 
-    .gallery-item:hover .gallery-item-inner { transform: scale(1.05); }
-
-    .gallery-overlay {
+    /* Fade edges */
+    .gallery-scroll-wrap::before,
+    .gallery-scroll-wrap::after {
+      content: '';
       position: absolute;
-      inset: 0;
-      background: rgba(30,15,10,0);
+      top: 0; bottom: 24px;
+      width: 60px;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .gallery-scroll-wrap::before {
+      left: 0;
+      background: linear-gradient(to right, var(--beige), transparent);
+    }
+    .gallery-scroll-wrap::after {
+      right: 0;
+      background: linear-gradient(to left, var(--beige), transparent);
+    }
+
+    /* Scroll arrow buttons */
+    .gallery-arrow {
+      position: absolute;
+      top: 50%; transform: translateY(calc(-50% - 12px));
+      z-index: 3;
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: var(--white);
+      border: 1px solid rgba(184,151,90,0.3);
+      color: var(--brown);
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: background 0.3s;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 4px 16px var(--shadow);
     }
-    .gallery-item:hover .gallery-overlay { background: rgba(30,15,10,0.3); }
-    .gallery-overlay-icon {
-      color: var(--white);
-      opacity: 0;
-      transform: scale(0.8);
-      transition: opacity 0.25s, transform 0.25s;
+    .gallery-arrow:hover { background: var(--gold); color: var(--white); border-color: var(--gold); }
+    .gallery-arrow svg { width: 18px; height: 18px; }
+    .gallery-arrow-prev { left: 4px; }
+    .gallery-arrow-next { right: 4px; }
+
+    .gallery-card {
+      flex: 0 0 auto;
+      width: 240px;
+      height: 340px;
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+      scroll-snap-align: start;
+      background: var(--blush);
+      box-shadow: 0 6px 28px rgba(107,76,59,0.14);
+      transition: transform 0.3s, box-shadow 0.3s;
     }
-    .gallery-item:hover .gallery-overlay-icon { opacity: 1; transform: scale(1); }
-    .gallery-overlay-icon svg { width: 32px; height: 32px; }
+    .gallery-card:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 16px 48px rgba(107,76,59,0.22);
+    }
+
+    /* Tall wide card variant */
+    .gallery-card.wide {
+      width: 360px;
+      height: 340px;
+    }
+
+    .gallery-card-inner {
+      position: absolute;
+      inset: 0;
+      transition: transform 0.5s ease;
+    }
+    .gallery-card:hover .gallery-card-inner { transform: scale(1.06); }
+
+    /* Placeholder gradients */
+    .gallery-card:nth-child(1) .gallery-card-inner { background: linear-gradient(160deg, #e8cfc4 0%, #c9967e 100%); }
+    .gallery-card:nth-child(2) .gallery-card-inner { background: linear-gradient(160deg, #d4b07a 0%, #9a7040 100%); }
+    .gallery-card:nth-child(3) .gallery-card-inner { background: linear-gradient(160deg, #c9967e 0%, #7a4830 100%); }
+    .gallery-card:nth-child(4) .gallery-card-inner { background: linear-gradient(160deg, #e0d0c4 0%, #b89080 100%); }
+    .gallery-card:nth-child(5) .gallery-card-inner { background: linear-gradient(160deg, #b8a890 0%, #6b4c3b 100%); }
+    .gallery-card:nth-child(6) .gallery-card-inner { background: linear-gradient(160deg, #d4c0b0 0%, #a07060 100%); }
+    .gallery-card:nth-child(7) .gallery-card-inner { background: linear-gradient(160deg, #c8b090 0%, #8a5c40 100%); }
+
+    /* Bottom label on each card */
+    .gallery-card-label {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 36px 16px 16px;
+      background: linear-gradient(to top, rgba(20,8,4,0.65), transparent);
+      z-index: 2;
+    }
+    .gallery-card-tag {
+      display: inline-block;
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
+      background: rgba(184,151,90,0.3);
+      border: 1px solid rgba(184,151,90,0.4);
+      border-radius: 20px;
+      padding: 3px 10px;
+      backdrop-filter: blur(4px);
+    }
+    .gallery-card-title {
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      font-style: italic;
+      color: rgba(255,255,255,0.92);
+      margin-top: 6px;
+    }
+
+    /* ph path note */
+    .gallery-ph-note {
+      font-size: 0.6rem;
+      color: rgba(255,255,255,0.35);
+      font-style: italic;
+      position: absolute;
+      top: 10px; right: 10px;
+    }
+
+    /* Drag hint */
+    .gallery-hint {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 20px;
+      padding-left: 24px;
+    }
+    .gallery-hint-text {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 400;
+    }
+    .gallery-hint svg { width: 18px; height: 18px; color: var(--gold); opacity: 0.7; }
 
     /* Lightbox */
     .lightbox {
@@ -550,16 +741,6 @@
       transition: color 0.2s;
     }
     .lightbox-close:hover { color: var(--white); }
-
-    /* Gallery placeholder labels */
-    .gallery-ph-label {
-      position: absolute;
-      bottom: 10px; left: 12px;
-      font-size: 0.65rem;
-      color: rgba(255,255,255,0.6);
-      letter-spacing: 0.1em;
-      font-style: italic;
-    }
 
     /* ─── REVIEWS ────────────────────────────────────────────── */
     #reviews { background: var(--white); }
@@ -680,26 +861,95 @@
 
     .contact-social {
       display: flex;
-      gap: 14px;
-      align-items: center;
+      flex-direction: column;
+      gap: 12px;
     }
-    .social-btn {
+    .contact-action-btns {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 4px;
+    }
+    .contact-action-btn {
       display: flex;
       align-items: center;
-      gap: 8px;
-      padding: 10px 18px;
-      border-radius: 30px;
-      border: 1px solid rgba(255,255,255,0.2);
-      font-size: 0.78rem;
-      color: rgba(250,247,243,0.85);
-      transition: all 0.2s;
+      gap: 14px;
+      padding: 14px 20px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.15);
+      color: var(--cream);
+      transition: all 0.22s;
+      cursor: pointer;
     }
-    .social-btn:hover {
-      background: rgba(255,255,255,0.1);
+    .contact-action-btn:hover {
+      transform: translateX(4px);
       border-color: var(--gold-lt);
-      color: var(--gold-lt);
     }
-    .social-btn svg { width: 16px; height: 16px; }
+    .contact-action-btn.btn-ig { background: rgba(193,53,132,0.18); }
+    .contact-action-btn.btn-ig:hover { background: rgba(193,53,132,0.3); }
+    .contact-action-btn.btn-viber { background: rgba(115,75,178,0.2); }
+    .contact-action-btn.btn-viber:hover { background: rgba(115,75,178,0.35); }
+    .contact-action-btn.btn-call { background: rgba(184,151,90,0.2); }
+    .contact-action-btn.btn-call:hover { background: rgba(184,151,90,0.35); }
+
+    .contact-action-icon {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .btn-ig .contact-action-icon { background: rgba(193,53,132,0.3); }
+    .btn-viber .contact-action-icon { background: rgba(115,75,178,0.3); }
+    .btn-call .contact-action-icon { background: rgba(184,151,90,0.3); }
+    .contact-action-icon svg { width: 20px; height: 20px; }
+
+    .contact-action-label { font-size: 0.68rem; color: rgba(250,247,243,0.55); letter-spacing: 0.1em; text-transform: uppercase; }
+    .contact-action-value { font-size: 0.92rem; font-weight: 400; color: rgba(250,247,243,0.92); margin-top: 1px; }
+
+    /* CTA banner above contact */
+    .cta-banner {
+      background: var(--brown);
+      padding: 56px 0;
+    }
+    .cta-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    .cta-text {
+      font-family: var(--serif);
+      font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+      font-weight: 300;
+      color: var(--cream);
+      line-height: 1.2;
+    }
+    .cta-text em { font-style: italic; color: var(--gold-lt); }
+    .btn-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 15px 34px;
+      border-radius: 40px;
+      background: var(--gold);
+      color: var(--cream);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.25s;
+      text-decoration: none;
+    }
+    .btn-cta:hover {
+      background: var(--gold-lt);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 32px rgba(184,151,90,0.4);
+    }
+    .btn-cta svg { width: 16px; height: 16px; flex-shrink: 0; }
 
     .map-wrap {
       border-radius: 6px;
@@ -715,16 +965,16 @@
       z-index: 90;
       width: 54px; height: 54px;
       border-radius: 50%;
-      background: #25D366;
+      background: #7360f2;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 6px 24px rgba(37,211,102,0.45);
+      box-shadow: 0 6px 24px rgba(115,96,242,0.45);
       transition: transform 0.2s, box-shadow 0.2s;
     }
     .whatsapp-float:hover {
       transform: scale(1.08);
-      box-shadow: 0 10px 32px rgba(37,211,102,0.55);
+      box-shadow: 0 10px 32px rgba(115,96,242,0.55);
     }
     .whatsapp-float svg { width: 28px; height: 28px; }
 
@@ -815,16 +1065,19 @@
 
       .hero-btns { flex-direction: column; }
       .hero-btns .btn { justify-content: center; }
+      .hero-ring { display: none; }
+      .hero-mono { font-size: 55vw; opacity: 0.5; }
 
       .about-grid { grid-template-columns: 1fr; gap: 36px; }
       .about-img { aspect-ratio: 3/2; order: -1; }
 
-      .gallery-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      .gallery-grid .g-wide { grid-column: span 2; }
+      .gallery-card { width: 200px; height: 290px; }
+      .gallery-card.wide { width: 300px; height: 290px; }
+      .gallery-arrow { display: none; }
 
       .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+      .cta-inner { flex-direction: column; text-align: center; }
+      .cta-inner .btn-cta { align-self: center; }
 
       .whatsapp-float { bottom: 80px; }
       .cookie-bar { bottom: 0; }
@@ -832,9 +1085,10 @@
 
     @media (max-width: 480px) {
       .section-title { font-size: 1.8rem; }
-      .hero-title { font-size: 2.4rem; }
-      .gallery-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+      .hero-title { font-size: 2.5rem; }
       .reviews-scroll { grid-template-columns: 1fr; }
+      .gallery-card { width: 180px; height: 260px; }
+      .gallery-card.wide { width: 260px; }
     }
   </style>
 </head>
@@ -852,7 +1106,7 @@
     <li><a href="#reviews">Utisci</a></li>
     <li><a href="#contact">Kontakt</a></li>
   </ul>
-  <a href="https://www.instagram.com/" target="_blank" rel="noopener" class="nav-ig" aria-label="Instagram">
+  <a href="https://www.instagram.com/frizerskisalonbogdana/" target="_blank" rel="noopener" class="nav-ig" aria-label="Instagram">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
       <rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/>
     </svg>
@@ -878,21 +1132,29 @@
 ════════════════════════════════════════════════ -->
 <section id="hero">
   <div class="hero-bg">
-    <!-- pictures/hero-bg.jpg -->
+    <!-- pictures/hero-bg.jpg — add: style="background-image:url('pictures/hero-bg.jpg');background-size:cover;background-position:center;" to .hero-bg -->
   </div>
+  <div class="hero-line-top"></div>
+  <div class="hero-mono">B</div>
+  <div class="hero-ring"></div>
   <div class="hero-overlay"></div>
   <div class="container">
     <div class="hero-content">
-      <p class="hero-eyebrow fade-up">Frizerski salon · Podgorica</p>
+      <div class="hero-tag fade-up">
+        <span class="hero-tag-dot"></span>
+        <span class="hero-tag-text">Frizerski salon · Podgorica</span>
+      </div>
       <h1 class="hero-title fade-up fade-up-d1">
-        Vaša kosa,<em>savršena svaki dan.</em>
+        <span class="t-normal">Vaša kosa,</span>
+        <span class="t-italic">savršena svaki dan.</span>
       </h1>
+      <div class="hero-rule fade-up fade-up-d2"></div>
       <p class="hero-sub fade-up fade-up-d2">
         Profesionalna njega kose u prijatnom i opuštenom ambijentu u Podgorici.
       </p>
       <div class="hero-btns fade-up fade-up-d3">
-        <a href="https://wa.me/38268000000" target="_blank" rel="noopener" class="btn btn-primary">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.117.551 4.1 1.514 5.818L.057 23.999l6.335-1.461C8.01 23.455 9.969 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.89 0-3.663-.516-5.184-1.412l-.37-.22-3.762.867.917-3.663-.242-.385A9.935 9.935 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+        <a href="viber://chat?number=+38269157000" class="btn btn-primary">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.4 0C5.5.1 1.2 4.6 1.2 10.5c0 2.1.6 4.1 1.7 5.8L1.4 22.1l5.9-1.5c1.6.9 3.4 1.4 5.3 1.4h.1c5.9 0 10.1-4.5 10.1-10.4C22.8 5.7 18.6.1 11.4 0zm.1 19.7h-.1c-1.7 0-3.3-.4-4.8-1.3l-.3-.2-3.5.9.9-3.4-.2-.3c-1-1.5-1.5-3.3-1.5-5.1 0-5.2 3.9-9.2 9.2-9.3h.1c5.2 0 9 3.9 9 9C20.3 15.8 16.7 19.7 11.5 19.7zm4.7-6.5c-.3-.1-1.5-.8-1.8-.9-.2-.1-.4-.1-.6.1-.2.2-.7.9-.8 1-.1.2-.3.2-.5.1-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.5-1.9-.2-.3 0-.4.1-.5.1-.1.3-.3.4-.5.1-.2.1-.3.2-.5.1-.2 0-.3 0-.5s-.6-1.5-.8-2c-.2-.5-.4-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.2s.9 2.6 1.1 2.7c.1.1 1.8 2.9 4.5 4.1.6.3 1.1.4 1.5.5.6.2 1.2.2 1.7.1.5-.1 1.5-.6 1.7-1.3.2-.6.2-1.2.1-1.3 0-.1-.2-.2-.4-.3z"/></svg>
           Zakaži termin
         </a>
         <a href="#services" class="btn btn-outline">
@@ -902,6 +1164,7 @@
     </div>
   </div>
   <div class="scroll-hint">
+    <span class="scroll-hint-text">Skrolaj</span>
     <div class="scroll-hint-line"></div>
   </div>
 </section>
@@ -1011,43 +1274,86 @@
   <div class="container">
     <p class="section-label fade-up">Galerija</p>
     <h2 class="section-title fade-up fade-up-d1">Naši <em>radovi</em>.</h2>
-    <div class="gallery-grid">
+  </div>
+  <div class="gallery-scroll-wrap fade-up">
+    <button class="gallery-arrow gallery-arrow-prev" id="galleryPrev" aria-label="Prethodni">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <button class="gallery-arrow gallery-arrow-next" id="galleryNext" aria-label="Sljedeći">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+    <div class="gallery-scroll-track" id="galleryTrack">
+
       <!-- pictures/gallery-1.jpg -->
-      <div class="gallery-item g-wide fade-up" data-src="pictures/gallery-1.jpg">
-        <div class="gallery-item-inner"></div>
-        <div class="gallery-overlay"><div class="gallery-overlay-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/><path d="M8 11h6M11 8v6"/></svg></div></div>
-        <span class="gallery-ph-label">pictures/gallery-1.jpg</span>
+      <div class="gallery-card wide" data-src="pictures/gallery-1.jpg">
+        <div class="gallery-card-inner"></div>
+        <span class="gallery-ph-note">pictures/gallery-1.jpg</span>
+        <div class="gallery-card-label">
+          <span class="gallery-card-tag">Bojenje</span>
+          <div class="gallery-card-title">Prirodni prijelaz</div>
+        </div>
       </div>
+
       <!-- pictures/gallery-2.jpg -->
-      <div class="gallery-item fade-up fade-up-d1" data-src="pictures/gallery-2.jpg">
-        <div class="gallery-item-inner"></div>
-        <div class="gallery-overlay"><div class="gallery-overlay-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/><path d="M8 11h6M11 8v6"/></svg></div></div>
-        <span class="gallery-ph-label">pictures/gallery-2.jpg</span>
+      <div class="gallery-card" data-src="pictures/gallery-2.jpg">
+        <div class="gallery-card-inner"></div>
+        <span class="gallery-ph-note">pictures/gallery-2.jpg</span>
+        <div class="gallery-card-label">
+          <span class="gallery-card-tag">Balayage</span>
+          <div class="gallery-card-title">Sunčani efekti</div>
+        </div>
       </div>
+
       <!-- pictures/gallery-3.jpg -->
-      <div class="gallery-item fade-up fade-up-d2" data-src="pictures/gallery-3.jpg">
-        <div class="gallery-item-inner"></div>
-        <div class="gallery-overlay"><div class="gallery-overlay-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/><path d="M8 11h6M11 8v6"/></svg></div></div>
-        <span class="gallery-ph-label">pictures/gallery-3.jpg</span>
+      <div class="gallery-card" data-src="pictures/gallery-3.jpg">
+        <div class="gallery-card-inner"></div>
+        <span class="gallery-ph-note">pictures/gallery-3.jpg</span>
+        <div class="gallery-card-label">
+          <span class="gallery-card-tag">Šišanje</span>
+          <div class="gallery-card-title">Ženski rez</div>
+        </div>
       </div>
+
       <!-- pictures/gallery-4.jpg -->
-      <div class="gallery-item fade-up fade-up-d3" data-src="pictures/gallery-4.jpg">
-        <div class="gallery-item-inner"></div>
-        <div class="gallery-overlay"><div class="gallery-overlay-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/><path d="M8 11h6M11 8v6"/></svg></div></div>
-        <span class="gallery-ph-label">pictures/gallery-4.jpg</span>
+      <div class="gallery-card wide" data-src="pictures/gallery-4.jpg">
+        <div class="gallery-card-inner"></div>
+        <span class="gallery-ph-note">pictures/gallery-4.jpg</span>
+        <div class="gallery-card-label">
+          <span class="gallery-card-tag">Pramenovi</span>
+          <div class="gallery-card-title">Svježi izgled</div>
+        </div>
       </div>
+
       <!-- pictures/gallery-5.jpg -->
-      <div class="gallery-item fade-up fade-up-d4" data-src="pictures/gallery-5.jpg">
-        <div class="gallery-item-inner"></div>
-        <div class="gallery-overlay"><div class="gallery-overlay-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/><path d="M8 11h6M11 8v6"/></svg></div></div>
-        <span class="gallery-ph-label">pictures/gallery-5.jpg</span>
+      <div class="gallery-card" data-src="pictures/gallery-5.jpg">
+        <div class="gallery-card-inner"></div>
+        <span class="gallery-ph-note">pictures/gallery-5.jpg</span>
+        <div class="gallery-card-label">
+          <span class="gallery-card-tag">Feniranje</span>
+          <div class="gallery-card-title">Glatka kosa</div>
+        </div>
       </div>
+
       <!-- pictures/gallery-6.jpg -->
-      <div class="gallery-item g-wide fade-up fade-up-d5" data-src="pictures/gallery-6.jpg">
-        <div class="gallery-item-inner" style="background: linear-gradient(135deg, #e0c5b8, #b8975a);"></div>
-        <div class="gallery-overlay"><div class="gallery-overlay-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/><path d="M8 11h6M11 8v6"/></svg></div></div>
-        <span class="gallery-ph-label">pictures/gallery-6.jpg</span>
+      <div class="gallery-card" data-src="pictures/gallery-6.jpg">
+        <div class="gallery-card-inner"></div>
+        <span class="gallery-ph-note">pictures/gallery-6.jpg</span>
+        <div class="gallery-card-label">
+          <span class="gallery-card-tag">Tretman</span>
+          <div class="gallery-card-title">Sjaj i volumen</div>
+        </div>
       </div>
+
+      <!-- pictures/gallery-7.jpg -->
+      <div class="gallery-card" data-src="pictures/gallery-7.jpg">
+        <div class="gallery-card-inner"></div>
+        <span class="gallery-ph-note">pictures/gallery-7.jpg</span>
+        <div class="gallery-card-label">
+          <span class="gallery-card-tag">Styling</span>
+          <div class="gallery-card-title">Svečana frizura</div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -1158,6 +1464,19 @@
 <!-- ═══════════════════════════════════════════════
      CONTACT
 ════════════════════════════════════════════════ -->
+<!-- CTA Banner -->
+<div class="cta-banner">
+  <div class="container">
+    <div class="cta-inner">
+      <div class="cta-text">Spremni za <em>novu frizuru?</em><br>Zakažite termin danas.</div>
+      <a href="#contact" class="btn-cta">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.06 2.18 2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14v2.92z"/></svg>
+        Kontaktirajte nas
+      </a>
+    </div>
+  </div>
+</div>
+
 <section id="contact">
   <div class="container">
     <p class="section-label fade-up">Kontakt</p>
@@ -1176,13 +1495,6 @@
         </div>
 
         <div class="contact-block fade-up fade-up-d2">
-          <p class="contact-block-label">Telefon</p>
-          <p class="contact-block-value">
-            <a href="tel:+38268000000">+382 68 000 000</a>
-          </p>
-        </div>
-
-        <div class="contact-block fade-up fade-up-d3">
           <p class="contact-block-label">Radno vrijeme</p>
           <div class="contact-block-value">
             <div class="contact-hours-row">
@@ -1204,19 +1516,46 @@
           </div>
         </div>
 
-        <div class="contact-block fade-up fade-up-d4">
-          <p class="contact-block-label">Pratite nas</p>
-          <div class="contact-social">
-            <a href="https://www.instagram.com/" target="_blank" rel="noopener" class="social-btn">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/>
-              </svg>
-              Instagram
+        <div class="contact-block fade-up fade-up-d3">
+          <p class="contact-block-label">Povežite se s nama</p>
+          <div class="contact-action-btns">
+
+            <a href="https://www.instagram.com/frizerskisalonbogdana/" target="_blank" rel="noopener" class="contact-action-btn btn-ig">
+              <div class="contact-action-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/>
+                </svg>
+              </div>
+              <div>
+                <div class="contact-action-label">Instagram</div>
+                <div class="contact-action-value">@frizerskisalonbogdana</div>
+              </div>
             </a>
-            <a href="https://wa.me/38268000000" target="_blank" rel="noopener" class="social-btn">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.117.551 4.1 1.514 5.818L.057 23.999l6.335-1.461C8.01 23.455 9.969 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.89 0-3.663-.516-5.184-1.412l-.37-.22-3.762.867.917-3.663-.242-.385A9.935 9.935 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
-              WhatsApp
+
+            <a href="viber://chat?number=+38269157000" class="contact-action-btn btn-viber">
+              <div class="contact-action-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M11.4 0C5.5.1 1.2 4.6 1.2 10.5c0 2.1.6 4.1 1.7 5.8L1.4 22.1l5.9-1.5c1.6.9 3.4 1.4 5.3 1.4h.1c5.9 0 10.1-4.5 10.1-10.4C22.8 5.7 18.6.1 11.4 0zm.1 19.7h-.1c-1.7 0-3.3-.4-4.8-1.3l-.3-.2-3.5.9.9-3.4-.2-.3c-1-1.5-1.5-3.3-1.5-5.1 0-5.2 3.9-9.2 9.2-9.3h.1c5.2 0 9 3.9 9 9C20.3 15.8 16.7 19.7 11.5 19.7zm4.7-6.5c-.3-.1-1.5-.8-1.8-.9-.2-.1-.4-.1-.6.1-.2.2-.7.9-.8 1-.1.2-.3.2-.5.1-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.5-1.9-.2-.3 0-.4.1-.5.1-.1.3-.3.4-.5.1-.2.1-.3.2-.5.1-.2 0-.3 0-.5s-.6-1.5-.8-2c-.2-.5-.4-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.2s.9 2.6 1.1 2.7c.1.1 1.8 2.9 4.5 4.1.6.3 1.1.4 1.5.5.6.2 1.2.2 1.7.1.5-.1 1.5-.6 1.7-1.3.2-.6.2-1.2.1-1.3 0-.1-.2-.2-.4-.3z"/>
+                </svg>
+              </div>
+              <div>
+                <div class="contact-action-label">Viber</div>
+                <div class="contact-action-value">+382 69 157 000</div>
+              </div>
             </a>
+
+            <a href="tel:+38269157000" class="contact-action-btn btn-call">
+              <div class="contact-action-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.06 2.18 2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14v2.92z"/>
+                </svg>
+              </div>
+              <div>
+                <div class="contact-action-label">Pozovite nas</div>
+                <div class="contact-action-value">+382 69 157 000</div>
+              </div>
+            </a>
+
           </div>
         </div>
 
@@ -1224,11 +1563,9 @@
 
       <div class="map-wrap fade-up fade-up-d2">
         <iframe
-          id="googleMap"
-          src=""
-          data-src="https://www.google.com/maps?q=42.4341029,19.2840775&z=15&output=embed"
+          src="https://www.google.com/maps?q=42.4341029,19.2840775&z=15&output=embed"
           width="100%"
-          height="400"
+          height="420"
           style="border:0; display:block;"
           allowfullscreen=""
           loading="lazy"
@@ -1240,9 +1577,9 @@
   </div>
 </section>
 
-<!-- WhatsApp Float -->
-<a href="https://wa.me/38268000000" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Zakažite termin na WhatsApp">
-  <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.117.551 4.1 1.514 5.818L.057 23.999l6.335-1.461C8.01 23.455 9.969 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.89 0-3.663-.516-5.184-1.412l-.37-.22-3.762.867.917-3.663-.242-.385A9.935 9.935 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+<!-- Viber Float -->
+<a href="viber://chat?number=+38269157000" class="whatsapp-float" aria-label="Zakažite termin na Viber">
+  <svg viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M11.4 0C5.5.1 1.2 4.6 1.2 10.5c0 2.1.6 4.1 1.7 5.8L1.4 22.1l5.9-1.5c1.6.9 3.4 1.4 5.3 1.4h.1c5.9 0 10.1-4.5 10.1-10.4C22.8 5.7 18.6.1 11.4 0zm.1 19.7h-.1c-1.7 0-3.3-.4-4.8-1.3l-.3-.2-3.5.9.9-3.4-.2-.3c-1-1.5-1.5-3.3-1.5-5.1 0-5.2 3.9-9.2 9.2-9.3h.1c5.2 0 9 3.9 9 9C20.3 15.8 16.7 19.7 11.5 19.7zm4.7-6.5c-.3-.1-1.5-.8-1.8-.9-.2-.1-.4-.1-.6.1-.2.2-.7.9-.8 1-.1.2-.3.2-.5.1-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.5-1.9-.2-.3 0-.4.1-.5.1-.1.3-.3.4-.5.1-.2.1-.3.2-.5.1-.2 0-.3 0-.5s-.6-1.5-.8-2c-.2-.5-.4-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.2s.9 2.6 1.1 2.7c.1.1 1.8 2.9 4.5 4.1.6.3 1.1.4 1.5.5.6.2 1.2.2 1.7.1.5-.1 1.5-.6 1.7-1.3.2-.6.2-1.2.1-1.3 0-.1-.2-.2-.4-.3z"/></svg>
 </a>
 
 <!-- ═══════════════════════════════════════════════
@@ -1255,11 +1592,11 @@
     <a href="#services">Usluge</a>
     <a href="#gallery">Radovi</a>
     <a href="#contact">Kontakt</a>
-    <a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://www.instagram.com/frizerskisalonbogdana/" target="_blank" rel="noopener">Instagram</a>
   </div>
   <div class="footer-divider"></div>
   <p class="footer-meta">
-    Ulica Slobode bb, 81000 Podgorica · <a href="tel:+38268000000">+382 68 000 000</a><br>
+    Ulica Slobode bb, 81000 Podgorica · <a href="tel:+38269157000">+382 69 157 000</a><br>
     Radno vrijeme: Utorak – Subota 10:00 – 19:00
   </p>
   <p class="footer-meta" style="margin-top:14px;font-size:0.68rem;opacity:0.4;">
@@ -1312,19 +1649,57 @@
         observer.unobserve(e.target);
       }
     });
-  }, { threshold: 0.12 });
-
+  }, { threshold: 0.1 });
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-  // ── Gallery lightbox
+  // ── Gallery horizontal scroll + drag
+  const track = document.getElementById('galleryTrack');
+  const btnPrev = document.getElementById('galleryPrev');
+  const btnNext = document.getElementById('galleryNext');
+
+  if (track) {
+    let isDown = false, startX, scrollLeft;
+
+    track.addEventListener('mousedown', e => {
+      isDown = true;
+      track.classList.add('dragging');
+      startX = e.pageX - track.offsetLeft;
+      scrollLeft = track.scrollLeft;
+    });
+    track.addEventListener('mouseleave', () => { isDown = false; track.classList.remove('dragging'); });
+    track.addEventListener('mouseup', () => { isDown = false; track.classList.remove('dragging'); });
+    track.addEventListener('mousemove', e => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - track.offsetLeft;
+      const walk = (x - startX) * 1.4;
+      track.scrollLeft = scrollLeft - walk;
+    });
+
+    btnPrev && btnPrev.addEventListener('click', () => {
+      track.scrollBy({ left: -280, behavior: 'smooth' });
+    });
+    btnNext && btnNext.addEventListener('click', () => {
+      track.scrollBy({ left: 280, behavior: 'smooth' });
+    });
+  }
+
+  // ── Gallery lightbox (click only, not drag)
   const lightbox = document.getElementById('lightbox');
   const lightboxImg = document.getElementById('lightboxImg');
   const lightboxClose = document.getElementById('lightboxClose');
+  let didDrag = false;
 
-  document.querySelectorAll('.gallery-item').forEach(item => {
-    item.addEventListener('click', () => {
-      const src = item.dataset.src;
-      if (src) {
+  if (track) {
+    track.addEventListener('mousedown', () => { didDrag = false; });
+    track.addEventListener('mousemove', () => { didDrag = true; });
+  }
+
+  document.querySelectorAll('.gallery-card').forEach(card => {
+    card.addEventListener('click', () => {
+      if (didDrag) { didDrag = false; return; }
+      const src = card.dataset.src;
+      if (src && lightbox) {
         lightboxImg.src = src;
         lightbox.classList.add('open');
         document.body.style.overflow = 'hidden';
@@ -1333,46 +1708,28 @@
   });
 
   function closeLightbox() {
-    lightbox.classList.remove('open');
+    lightbox && lightbox.classList.remove('open');
     document.body.style.overflow = '';
-    lightboxImg.src = '';
+    if (lightboxImg) lightboxImg.src = '';
   }
-  lightboxClose.addEventListener('click', closeLightbox);
-  lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+  lightboxClose && lightboxClose.addEventListener('click', closeLightbox);
+  lightbox && lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
 
   // ── Cookie bar
   const cookieBar = document.getElementById('cookieBar');
   const cookieAccept = document.getElementById('cookieAccept');
-
-  if (!localStorage.getItem('bogdana_cookies_accepted')) {
-    setTimeout(() => cookieBar.classList.add('show'), 600);
+  if (!localStorage.getItem('bogdana_cookies_ok')) {
+    setTimeout(() => cookieBar && cookieBar.classList.add('show'), 700);
   }
-
-  cookieAccept.addEventListener('click', () => {
-    localStorage.setItem('bogdana_cookies_accepted', '1');
-    cookieBar.classList.remove('show');
-
-    // Load map iframe after consent
-    const iframe = document.getElementById('googleMap');
-    if (iframe && iframe.dataset.src) {
-      iframe.src = iframe.dataset.src;
-    }
+  cookieAccept && cookieAccept.addEventListener('click', () => {
+    localStorage.setItem('bogdana_cookies_ok', '1');
+    cookieBar && cookieBar.classList.remove('show');
   });
 
-  // If already accepted, load map immediately
-  if (localStorage.getItem('bogdana_cookies_accepted')) {
-    const iframe = document.getElementById('googleMap');
-    if (iframe && iframe.dataset.src) {
-      iframe.src = iframe.dataset.src;
-    }
-  }
-
-  // ── Hero elements animate in on load
+  // ── Hero animate in on load
   window.addEventListener('load', () => {
-    document.querySelectorAll('#hero .fade-up').forEach(el => {
-      el.classList.add('visible');
-    });
+    document.querySelectorAll('#hero .fade-up').forEach(el => el.classList.add('visible'));
   });
 </script>
 </body>
